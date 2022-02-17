@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+#dclock
+{
+height:50px;
+width: 200px;
+background-color: aquamarine;
+
+border-width: 30px;
+border-color: blue;
+text-align: center;
+padding-top: 10PX;
+}
+.container
+{ position:absolute;
+    margin: auto;
+  width:500px;
+  height:600px;
+  left:50%;
+
+} 
+#clock
+{
+  
+ width:230px;
+ background-color: rgb(231, 236, 240);
+ border-top: black;
+  margin-top:30%;
+  height:200px;
+  position: absolute;
+  display:none;
+
+}
+input{
+
+width:50px;
+margin: 5px;
+margin-top:50px;
+}
+.btn
+{
+ margin-left:30%;
+
+
+}
+#alarm
+{
+
+background-color: aqua;
+font-size: 20px;
+margin-top:50px;
+
+}
+
+</style>
+
+</head>
+<body>
+<div class="container">
+<div id="dclock">
+
+
+</div>
+<div id="clock">
+
+<input type="text" id="hours">
+:
+<input type="text" id="min">
+:
+<input type="text" id="sec">
+<br>
+<br>
+<div class="btn">
+<button onclick="set()"> set</button>
+<button onclick="cancel()"> cancel</button>
+</div>
+
+
+</div>
+<button id="alarm" onclick="showalarm()">  set Alarm</button>
+
+</div>
+
+
+
+
+
+
+
+<script>
+ let period;
+ function showClock()
+ {let mydate=new Date();
+ let value=mydate.toLocaleTimeString()
+ dclock.innerHTML=value;
+ 
+ }
+ function showalarm()
+ {
+clock.style.display="block";
+
+ }
+
+ function set()
+ {
+   let hour=hours.value;
+   let m=min.value;
+   let s=sec.value;
+   let t=hour+":"+m+":"+s
+    period=Number(Number(hour)*3600+Number(m)*60+Number(s))*1000;
+   console.log(period);
+   setTimeout(alarm,period);
+
+
+ }
+ function cancel()
+ {
+     hours.value="0";
+     min.value="0";
+     sec.value="0";
+  clock.style.display="none";
+
+
+ }
+ function alarm()
+ {
+
+alert("time out");
+
+ }
+ 
+ setInterval(showClock,1000);
+
+
+
+</script>
+
+
+
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+</html>
