@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table{
+height: 500 px;
+width:300 px;
+margin:20px;
+
+}
+.label
+{
+
+margin:20px;
+
+}
+#todo
+{
+width:400px;
+margin:20px;
+
+}
+#container
+{
+height:500px;
+width:600px;
+margin:auto;
+background-color:rgb(209, 221, 224) ;
+
+
+
+}
+#r{
+   background-color: green;
+
+
+}
+
+.colwidth{
+            width:500px;
+        } 
+
+
+ #cancel{
+             
+ margin-left: 400px;
+
+  }
+</style>
+
+</head>
+<body>
+<div id="container">
+  <label class="label"> task</label>
+<input id="todo" type="text">
+<input id="submit" type="submit" >
+<table>
+    <thead>
+        <tr>
+          <th scope="col" class ="colwidth"></th>
+          <th scope="col" class ="col2width"></th>
+          <th scope="col" class ="col3width"></th>
+        </tr>
+      </thead>
+      <tbody id="tbod">
+      </tbody>
+
+</table>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<script>
+    class todoList{
+
+        constructor()
+        {
+          this.x=0;
+           this.tasks=[];
+          
+    if(localStorage.tasks)
+    { this.tasks=JSON.parse(localStorage.tasks);
+   this. Show();}
+    if(localStorage.id)
+    this.x= Number(JSON.parse(localStorage.id));
+      let sub=document.getElementById("submit");
+      sub.onclick=()=>{
+         this.submit();
+
+      } 
+
+      document.addEventListener("click", e => {
+          this.listnerHandler(e);
+      });
+
+        } 
+        listnerHandler(event)
+         {
+          let buttonId= event.target.id 
+             if(buttonId==="done")
+                { let elementId=Number(event.target.getAttribute("elementId"));
+                  console.log(elementId);
+                  this.btnc(elementId);
+                }
+
+            else if(buttonId==="cancel")
+            {  let elementId=Number(event.target.getAttribute("elementId"));
+                console.log("cancel");
+                this.btnd(elementId);
+
+            }
+
+         }
+
+
+
+
+
+
+
+
+        submit()
+{  if(todo.value!="")
+{let task=document.getElementById("todo").value;
+todo.value="";
+let done=false;
+  let item ={ task_name:task,done_case:done,id:this.x++};
+  localStorage.id=this.x;
+
+this.tasks.push(item);
+ let str=JSON.stringify(this.tasks);
+ localStorage.tasks=str;
+console.log("sub"); 
+this.Show( );}
+}
+
+ Show(  )
+ {  //let tasks=JSON.parse(localStorage.tasks);
+ console.log(this.tasks);
+    let data=this. tasks.map( (element)=>
+     { if(element.done_case)
+        return `<tr id="r" > <td> ${element.task_name}</td>  <td> <button id="cancel" elementId=${element.id} >cancel</button></td> <td> <button id="done" elementId=${element.id}>done</button></td></tr>`
+        else
+        return `<tr  > <td> ${element.task_name}</td>  <td> <button id="cancel" elementId=${element.id} >cancel</button></td> <td> <button id="done" elementId=${element.id} > done</button></td></tr>`
+     })
+    let str=data.join("\n")
+    console.log(str);
+     tbod.innerHTML=str;
+     console.log("sh");
+
+ }
+
+  btnd( id)
+{   console.log(id);
+    
+   // let tasks=JSON.parse(localStorage.tasks);
+    this.tasks=this. tasks.filter(function (element)
+     {   
+        return element.id!=id;
+        
+
+     })
+    
+     let str=JSON.stringify(this.tasks);
+ localStorage.tasks=str;
+   console.log( this.tasks);
+  this. Show();
+} 
+btnc(id)
+{// let tasks=JSON.parse(localStorage.tasks);
+this.tasks.forEach(o=>{ 
+if(o.id===id)
+  o.done_case=true;
+
+}); let str=JSON.stringify(this.tasks);
+ localStorage.tasks=str;
+this.Show()
+
+} 
+        
+
+
+
+    }
+    
+  
+   
+   
+
+
+ 
+
+
+let todol=new todoList();
+</script>
+</body>
+
+
+
+
+
+
+
+
+</html>
